@@ -25,7 +25,7 @@ namespace TaskList.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DataDeConclusao")
+                    b.Property<DateTime?>("DataDeConclusao")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataDeCriacao")
@@ -34,7 +34,7 @@ namespace TaskList.Data.Migrations
                     b.Property<DateTime>("DataDeEdicao")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataDeExclusao")
+                    b.Property<DateTime?>("DataDeExclusao")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")

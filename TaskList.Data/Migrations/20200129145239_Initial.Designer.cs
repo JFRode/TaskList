@@ -10,7 +10,7 @@ using TaskList.Data.Contexts;
 namespace TaskList.Data.Migrations
 {
     [DbContext(typeof(TasklistDbContext))]
-    [Migration("20200129141849_Initial")]
+    [Migration("20200129145239_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace TaskList.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DataDeConclusao")
+                    b.Property<DateTime?>("DataDeConclusao")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataDeCriacao")
@@ -36,7 +36,7 @@ namespace TaskList.Data.Migrations
                     b.Property<DateTime>("DataDeEdicao")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataDeExclusao")
+                    b.Property<DateTime?>("DataDeExclusao")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")

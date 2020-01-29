@@ -42,6 +42,8 @@ namespace TaskList.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            ConfigureMigration(app);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -57,6 +59,15 @@ namespace TaskList.API
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void ConfigureMigration(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<TasklistDbContext>();
+                context.Database.Migrate();
+            }
         }
 
         private void ConfigureMappingService(IServiceCollection services)

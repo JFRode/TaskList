@@ -17,8 +17,8 @@ namespace TaskList.Data.Migrations
                     Descricao = table.Column<string>(nullable: true),
                     DataDeCriacao = table.Column<DateTime>(nullable: false),
                     DataDeEdicao = table.Column<DateTime>(nullable: false),
-                    DataDeExclusao = table.Column<DateTime>(nullable: false),
-                    DataDeConclusao = table.Column<DateTime>(nullable: false)
+                    DataDeExclusao = table.Column<DateTime>(nullable: true),
+                    DataDeConclusao = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
