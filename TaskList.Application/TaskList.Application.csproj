@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaskList.Data\TaskList.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DataTransferObjects">
+      <HintPath>..\..\Tasklist-Contratos\DataTransferObjects\bin\Debug\netcoreapp3.1\DataTransferObjects.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
