@@ -1,4 +1,5 @@
 ﻿using DataTransferObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading;
@@ -8,6 +9,7 @@ using TaskList.Application.Services.Interfaces;
 namespace TaskList.API.Controllers
 {
     [Route("api/tasks")]
+    [Authorize()]
     public class TaskController : Controller
     {
         private readonly ITaskService _taskService;

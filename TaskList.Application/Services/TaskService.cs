@@ -48,7 +48,9 @@ namespace TaskList.Application.Services
                 if (task == null)
                     throw new Exception();
 
-                _tasklistDbContext.Tasks.Remove(task);
+                task.Excluido = true;
+
+                _tasklistDbContext.Tasks.Update(task);
                 _tasklistDbContext.SaveChangesAsync();
             }, cancellationToken);
 
