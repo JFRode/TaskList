@@ -1,6 +1,8 @@
 # TaskList
 Projeto de controle de tarefas
 
+Os projetos **Tasklist.Application** e **Tasklist.API** possuem dependência do repositório [Tasklist-Contratos](https://github.com/JFRode/Tasklist-Contratos) o qual seria um NuGet. Ao realizar o build do projeto você precisará apontar para a .dll do seu diretório para ambas as referências.
+
 **SwaggerURL:** https://localhost:44369/swagger
 
 ## Exemplos
