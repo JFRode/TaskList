@@ -1,5 +1,5 @@
 # TaskList
-Projeto de controle de tarefas
+Projeto CRUD de tarefas
 
 Os projetos **Tasklist.Application** e **Tasklist.API** possuem dependência do repositório [Tasklist-Contratos](https://github.com/JFRode/Tasklist-Contratos) o qual seria um NuGet. Ao realizar o build do projeto você precisará apontar para a .dll do seu diretório para ambas as referências.
 
@@ -8,7 +8,7 @@ Os projetos **Tasklist.Application** e **Tasklist.API** possuem dependência do 
 ## Exemplos
 
 ### Requisitando o Token
-**URL:** https://localhost:44369/token
+**Endpoint:** https://localhost:44369/token
 
 **Body:**
 ```
@@ -16,7 +16,7 @@ Os projetos **Tasklist.Application** e **Tasklist.API** possuem dependência do 
 ```
 
 ### Exemplo de POST
-**URL:** https://localhost:44369/api/tasks
+**Endpoint:** https://localhost:44369/api/tasks
 
 **Body:**
 ```
@@ -35,4 +35,7 @@ Os projetos **Tasklist.Application** e **Tasklist.API** possuem dependência do 
 Authorization:bearer "aqui vai o token gerado"
 Content-Type:application/json
 ```
+
+### Exemplo de chamada com OData
+No endpoint https://localhost:44369/api/tasks é retornado todas as tasks do banco. Esse endpoint está habilitado para uso do OData como por exemplo **OrderBy**: ```https://localhost:44369/api/tasks?$orderby=titulo asc```
 
