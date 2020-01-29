@@ -1,6 +1,18 @@
 # TaskList
 Projeto de controle de tarefas
 
+**SwaggerURL:** https://localhost:44369/swagger
+
+## Exemplos
+
+### Requisitando o Token
+**URL:** https://localhost:44369/token
+
+**Body:**
+```
+"83a486ef58ee4b349a432d53ecc23463"
+```
+
 ### Exemplo de POST
 **URL:** https://localhost:44369/api/tasks
 
@@ -15,3 +27,10 @@ Projeto de controle de tarefas
     "DataDeEdicao": "2019-09-27T19:46:06.7534281-03:00"
 }
 ```
+
+**Bulk edit dos Headers no Postman**:
+```
+Authorization:bearer "aqui vai o token gerado"
+Content-Type:application/json
+```
+
