@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,8 @@ namespace TaskList.API
 
             services.AddDbContext<TasklistDbContext>(options =>
               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddMvc().AddFluentValidation();
 
             IocService.Register(services);
             IocDomain.Register(services);

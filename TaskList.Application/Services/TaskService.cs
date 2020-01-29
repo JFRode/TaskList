@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataTransferObjects;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,23 @@ namespace TaskList.Application.Services
         private readonly TasklistDbContext _tasklistDbContext;
         private readonly IMapper _mapper;
         private readonly ITaskBuilder _taskBuilder;
+        private readonly IValidator<TaskDto> _validator;
 
-        public TaskService(TasklistDbContext tasklistDbContext, IMapper mapper, ITaskBuilder taskBuilder)
+        public TaskService(TasklistDbContext tasklistDbContext, IMapper mapper, ITaskBuilder taskBuilder, IValidator<TaskDto> validator)
         {
             _tasklistDbContext = tasklistDbContext;
             _mapper = mapper;
             _taskBuilder = taskBuilder;
+            _validator = validator;
         }
 
         public async Task<TaskDto> AddAsync(TaskDto taskDto, CancellationToken cancellationToken)
         {
+            var validacao = _validator.Validate(taskDto);
+
+            if (!validacao.IsValid)
+                throw new Exception(validacao.Errors.First().ErrorMessage);
+
             var task = _mapper.Map<Domain.Task>(taskDto);
 
             await Task.Run(() =>
@@ -71,6 +79,11 @@ namespace TaskList.Application.Services
 
         public async Task<TaskDto> UpdateAsync(TaskDto taskDto, CancellationToken cancellationToken)
         {
+            var validacao = _validator.Validate(taskDto);
+
+            if (!validacao.IsValid)
+                throw new Exception(validacao.Errors.First().ErrorMessage);
+
             var task = _mapper.Map<Domain.Task>(taskDto);
 
             await Task.Run(() =>

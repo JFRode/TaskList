@@ -29,7 +29,7 @@ namespace TaskList.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.StackTrace);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -43,7 +43,7 @@ namespace TaskList.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.StackTrace);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -57,7 +57,7 @@ namespace TaskList.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.StackTrace);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -71,7 +71,7 @@ namespace TaskList.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.StackTrace);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -85,7 +85,7 @@ namespace TaskList.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.StackTrace);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -99,7 +99,7 @@ namespace TaskList.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.StackTrace);
+                return BadRequest(ex.Message);
             }
         }
     }

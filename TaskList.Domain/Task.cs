@@ -14,7 +14,6 @@ namespace TaskList.Domain
         public bool Status { get; set; }
 
         [MaxLength(255)]
-        [MinLength(5)]
         public string Descricao { get; set; }
 
         public DateTime DataDeCriacao { get; set; }
