@@ -10,7 +10,7 @@ namespace TaskList.Domain
         public string Descricao { get; set; }
         public DateTime DataDeCriacao { get; set; }
         public DateTime DataDeEdicao { get; set; }
-        public DateTime DataDeExclusao { get; set; }
-        public DateTime DataDeConclusao { get; set; }
+        public DateTime? DataDeExclusao { get; set; }
+        public DateTime? DataDeConclusao { get; set; }
     }
 }
