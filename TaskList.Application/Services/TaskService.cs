@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataTransferObjects;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,9 @@ namespace TaskList.Application.Services
 
             await Task.Run(() =>
             {
-                task = _tasklistDbContext.Tasks.Where(t => t.Id == taskId).FirstOrDefault();
+                task = _tasklistDbContext.Tasks
+                    .Where(t => t.Id == taskId)
+                    .FirstOrDefault();
 
                 if (task == null)
                     throw new Exception();
@@ -67,13 +70,17 @@ namespace TaskList.Application.Services
 
         public async Task<List<TaskDto>> GetAllAsync(CancellationToken cancellationToken)
         {
-            var tasks = await Task.Run(() => _tasklistDbContext.Tasks, cancellationToken);
+            var tasks = await Task.Run(() => _tasklistDbContext.Tasks.AsNoTracking(), cancellationToken);
             return _mapper.Map<List<TaskDto>>(tasks);
         }
 
         public async Task<TaskDto> GetAsync(Guid taskId, CancellationToken cancellationToken)
         {
-            var task = await Task.Run(() => _tasklistDbContext.Tasks.Where(t => t.Id == taskId).FirstOrDefault(), cancellationToken);
+            var task = await Task.Run(() => _tasklistDbContext.Tasks
+                .AsNoTracking()
+                .Where(t => t.Id == taskId)
+                .FirstOrDefault(), cancellationToken);
+
             return _mapper.Map<TaskDto>(task);
         }
 
@@ -101,7 +108,10 @@ namespace TaskList.Application.Services
 
             await Task.Run(() =>
             {
-                task = _tasklistDbContext.Tasks.Where(t => t.Id == taskId).FirstOrDefault();
+                task = _tasklistDbContext.Tasks
+                    .Where(t => t.Id == taskId)
+                    .FirstOrDefault();
+
                 task.Status = status;
 
                 _tasklistDbContext.Tasks.Update(task);
