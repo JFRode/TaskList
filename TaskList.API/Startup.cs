@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using TaskList.Application.Ioc;
 using TaskList.Application.Mappers;
 using TaskList.Data.Contexts;
@@ -42,6 +43,7 @@ namespace TaskList.API
 
             ConfigureMappingService(services);
             ConfigureAuthenticationService(services);
+            ConfigureSwaggerService(services);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -64,6 +66,12 @@ namespace TaskList.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tasklist.API v1");
             });
         }
 
@@ -117,6 +125,31 @@ namespace TaskList.API
                         }
                     };
                 });
+        }
+
+        private void ConfigureSwaggerService(IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Tasklist.API",
+                    Version = "v1",
+                    Description = "API de comunicação com lista de Tarefas",
+                    TermsOfService = new Uri("https://github.com/JFRode/TaskList/blob/master/LICENSE"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "João Felipe Gonçalves",
+                        Email = string.Empty,
+                        Url = new Uri("https://github.com/jfrode"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under MIT",
+                        Url = new Uri("https://github.com/JFRode/TaskList/blob/master/LICENSE"),
+                    }
+                });
+            });
         }
     }
 }
