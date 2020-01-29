@@ -1,7 +1,10 @@
 ﻿using DataTransferObjects;
+using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using TaskList.Application.Services.Interfaces;
@@ -20,16 +23,17 @@ namespace TaskList.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        [EnableQuery()]
+        public async Task<IEnumerable<TaskDto>> GetAll(CancellationToken cancellationToken)
         {
             try
             {
                 var tasks = await _taskService.GetAllAsync(cancellationToken);
-                return Ok(tasks);
+                return tasks;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest(ex.Message);
+                return null;
             }
         }
 

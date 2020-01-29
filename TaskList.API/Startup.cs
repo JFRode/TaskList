@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +11,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
-using System.Threading.Tasks;
 using TaskList.Application.Ioc;
 using TaskList.Application.Mappers;
 using TaskList.Data.Contexts;
@@ -29,10 +29,12 @@ namespace TaskList.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             services.AddDbContext<TasklistDbContext>(options =>
               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddOData();
+            services.AddControllers(mvcOptions =>
+                mvcOptions.EnableEndpointRouting = false);
 
             services.AddMvc().AddFluentValidation();
 
@@ -70,6 +72,12 @@ namespace TaskList.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tasklist.API v1");
+            });
+
+            app.UseMvc(routeBuilder =>
+            {
+                routeBuilder.EnableDependencyInjection();
+                routeBuilder.Expand().Select().Count().OrderBy();
             });
         }
 
@@ -114,12 +122,12 @@ namespace TaskList.API
                         OnAuthenticationFailed = context =>
                         {
                             Console.WriteLine($"Token inválido: {context.Exception.Message}");
-                            return Task.CompletedTask;
+                            return System.Threading.Tasks.Task.CompletedTask;
                         },
                         OnTokenValidated = context =>
                         {
                             Console.WriteLine($"Token Válido: {context.SecurityToken}");
-                            return Task.CompletedTask;
+                            return System.Threading.Tasks.Task.CompletedTask;
                         }
                     };
                 });
