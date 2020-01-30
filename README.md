@@ -1,5 +1,19 @@
 # TaskList
-Projeto CRUD de tarefas
+Projeto CRUD de tarefas utilizando:
+* DDD
+* Builder
+* DTO
+* Injeção de dependência
+* EF Core
+* SQL Server
+* AutoMapper
+* Builder
+* Swagger
+* JWT
+* API Rest assíncrona
+* FluentValidator
+* OData
+
 
 Os projetos **Tasklist.Application** e **Tasklist.API** possuem dependência do repositório [Tasklist-Contratos](https://github.com/JFRode/Tasklist-Contratos) o qual seria um NuGet. Ao realizar o build do projeto você precisará apontar para a .dll do seu diretório para ambas as referências.
 
